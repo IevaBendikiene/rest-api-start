@@ -39,8 +39,8 @@
         // get values
         const vardas = form.vardas.value
         const tech = form.tech.value
-        const laivas = form.laivas.value
-        const location = locstion.coordinates([form.lng.value, form.lat.value])
+        const laisvas = form.laisvas.value
+        const location = [form.lng.value, form.lat.value]
     
         try {
             const res = await fetch('/add-developer', {
