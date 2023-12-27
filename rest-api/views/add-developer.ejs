@@ -1,0 +1,62 @@
+<%- include('./partials/header.ejs') %>
+<%- include('./partials/nav.ejs') %>
+
+  <div class="add-developer content">
+    <form method="POST">
+        <label for="name">Prasome irasyti savo varda</label>
+        <input type="text" id="name" name="vardas" required>
+        <label for="tech">Prasome irasyti technologijas</label>
+        <input type="text" id="tech" name="tech">
+        <p>Ar jus siuo metu laisvas?</p>
+          <div class="radio">
+            <label for="true">Taip</label>
+            <input type="radio" id="true" name="laisvas" checked="checked">
+            <label for="false">Ne</label>
+            <input type="radio" id="false" name="laisvas">
+          </div>
+        <p>Iveskite savo gyvenamos vietos coordinatas</p>
+        <div>
+            <label for="length">Ilguma</label>
+            <input type="number" id="length" name="lng">
+            <label for="width">Platuma</label>
+            <input type="number" id="'width" name="lat">
+        </div>    
+        <button>Prideti programuotoja</button>
+    </form>
+  </div>
+  <script>
+    const form = document.querySelector('form')
+    // const emailError = document.querySelector('.email.error')
+    // const passwordError = document.querySelector('.password.error')
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+
+        //reset errors
+        // emailError.textContent = ''
+        // passwordError.textContent = ''
+
+        // get values
+        const vardas = form.vardas.value
+        const tech = form.tech.value
+        const laivas = form.laivas.value
+        const location = locstion.coordinates([form.lng.value, form.lat.value])
+    
+        try {
+            const res = await fetch('/add-developer', {
+                method: 'POST',
+                body: JSON.stringify({vardas, tech, laisvas, location}),
+                headers: {'Content-Type': 'application/json'}
+            })
+            const data = await res.json()
+            console.log(data)   
+        }
+        catch(err){
+            console.log(err)
+        }
+    })
+</script>
+
+
+
+<%- include('./partials/footer.ejs') %>
